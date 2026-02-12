@@ -103,7 +103,7 @@ def index():
                 image_response = openai.images.generate(
                     model="gpt-image-1-mini",
                     prompt=image_prompt,
-                    size="512x512"   # Lower memory
+                    size="1024x1024"   # Lower memory
                 )
 
                 image_base64 = image_response.data[0].b64_json
