@@ -76,8 +76,8 @@ def index():
 
             {dream_text}
 
-            Style: Dadaist, mystical, ethereal,
-            symbolic, psychological, glitchiness
+            Style: Dadaist, 4k, ethereal,
+            internet aesthetics, psychological, glitchiness
             """
 
             image_response = openai.images.generate(
