@@ -71,13 +71,13 @@ def index():
             # ---------------------------
 
             image_prompt = f"""
-            Create a surreal, symbolic dreamlike illustration
-            inspired by this dream and its Jungian meaning:
+            Create a dadaist, ethereal illustration
+            inspired by this dream and its Jungian meaning. Convert symbolic elements into logo-like motifs to have contrasting art styles:
 
             {dream_text}
 
             Style: Dadaist, 4k, ethereal,
-            internet aesthetics, psychological, glitchiness
+            internet aesthetics, symbolic, glitchiness
             """
 
             image_response = openai.images.generate(
