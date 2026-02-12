@@ -9,9 +9,17 @@
 
 </head>
 
-<body>
+{% if image_path %}
+<style>
+    :root {
+        --dream-bg-image: url('{{ image_path }}');
+    }
+</style>
+{% endif %}
 
-<div class="container">
+<body class="{% if image_path %}has-background{% endif %}">
+
+<div class="container {% if image_path %}has-background{% endif %}">
 
     <h1>Jungian Dream Analysis Machine</h1>
 

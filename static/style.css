@@ -1,55 +1,67 @@
 body {
-    background: #000;
-    color: #e5e7eb;
-    font-family: Arial, sans-serif;
+    margin: 0;
     min-height: 100vh;
+    font-family: Arial, sans-serif;
+    background: #f3f4f6;
+    color: #111827;
+}
+
+body.has-background {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)), var(--dream-bg-image);
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
 }
 
 .container {
-    max-width: 800px;
-    margin: auto;
-    padding: 40px;
+    max-width: 900px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+.container.has-background {
+    background: rgba(255, 255, 255, 0.88);
+    backdrop-filter: blur(2px);
 }
 
 h1 {
-    text-align: center;
-    margin-bottom: 30px;
+    margin-top: 0;
+}
+
+form {
+    display: grid;
+    gap: 0.75rem;
 }
 
 textarea {
     width: 100%;
-    height: 150px;
-    padding: 15px;
+    min-height: 140px;
+    padding: 0.75rem;
+    border: 1px solid #d1d5db;
     border-radius: 8px;
-    border: none;
-    font-size: 16px;
     resize: vertical;
+    box-sizing: border-box;
 }
 
 button {
-    margin-top: 15px;
-    padding: 12px 25px;
-    font-size: 16px;
-    border: none;
-    background: #6366f1;
-    color: white;
-    border-radius: 6px;
+    width: fit-content;
+    padding: 0.6rem 1rem;
+    border: 0;
+    border-radius: 8px;
+    background: #111827;
+    color: #ffffff;
     cursor: pointer;
 }
 
-button:hover {
-    background: #4f46e5;
-}
-
 .results {
-    margin-top: 40px;
-    background: rgba(255,255,255,0.05);
-    padding: 25px;
-    border-radius: 10px;
+    margin-top: 1.5rem;
 }
 
 img {
     max-width: 100%;
-    margin-top: 15px;
+    height: auto;
     border-radius: 10px;
 }

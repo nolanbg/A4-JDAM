@@ -11,6 +11,7 @@ import uuid
 load_dotenv()
 
 app = Flask(__name__)
+os.makedirs("static", exist_ok=True)
 
 openai.api_key = os.getenv("OPENAI_API_KEY")
 
