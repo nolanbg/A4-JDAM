@@ -72,7 +72,7 @@ def index():
 
             image_prompt = f"""
             Create a dadaist, ethereal illustration
-            inspired by this dream and its Jungian meaning. Combine logo-like motifs with incredibly realistic imagery, blending them through glitches, distortion and overexposure.:
+            inspired by this dream and its Jungian meaning. Combine logo-like motifs with incredibly realistic imagery, blending them through glitches, distortion and overexposure. Blur the lines between what is real and what is not, make the viewer question whether they are looking at another screen. Emphasize disorientation:
 
             {dream_text}
 
