@@ -3,12 +3,11 @@ import openai
 import os
 from dotenv import load_dotenv
 import base64
+from PIL import Image
+from io import BytesIO
 import uuid
 
-# ----------------------------------
 # Load environment variables
-# ----------------------------------
-
 load_dotenv()
 
 app = Flask(__name__)
@@ -16,10 +15,7 @@ app = Flask(__name__)
 openai.api_key = os.getenv("OPENAI_API_KEY")
 
 
-# ----------------------------------
-# Jungian System Prompt
-# ----------------------------------
-
+# Jungian system prompt
 JUNGIAN_PROMPT = """
 You are a Jungian psychoanalyst specializing in dream interpretation.
 
@@ -36,34 +32,20 @@ Speak clearly and empathetically.
 """
 
 
-# ----------------------------------
-# Main Route
-# ----------------------------------
-
 @app.route("/", methods=["GET", "POST"])
 def index():
 
     interpretation = None
     image_path = None
-    error_message = None
 
     if request.method == "POST":
 
-        dream_text = request.form.get("dream", "").strip()
-
-        if not dream_text:
-            error_message = "Please enter a dream."
-            return render_template(
-                "index.html",
-                interpretation=interpretation,
-                image_path=image_path,
-                error=error_message
-            )
+        dream_text = request.form["dream"]
 
         try:
-            # ----------------------------------
+            # ---------------------------
             # TEXT INTERPRETATION
-            # ----------------------------------
+            # ---------------------------
 
             text_response = openai.responses.create(
                 model="gpt-4.1",
@@ -84,63 +66,50 @@ def index():
             interpretation = text_response.output_text
 
 
-            # ----------------------------------
-            # IMAGE GENERATION (SAFE)
-            # ----------------------------------
+            # ---------------------------
+            # IMAGE GENERATION
+            # ---------------------------
 
             image_prompt = f"""
-            Create a surreal, symbolic, dreamlike illustration
+            Create a surreal, symbolic dreamlike illustration
             inspired by this dream and its Jungian meaning:
 
             {dream_text}
 
             Style: painterly, mystical, atmospheric,
-            psychological, soft lighting
+            symbolic, psychological, soft lighting
             """
 
-            try:
+            image_response = openai.images.generate(
+                model="gpt-image-1",
+                prompt=image_prompt,
+                size="1024x1024"
+            )
 
-                image_response = openai.images.generate(
-                    model="gpt-image-1-mini",
-                    prompt=image_prompt,
-                    size="1024x1024"   # Lower memory
-                )
+            # Decode base64 image
+            image_base64 = image_response.data[0].b64_json
+            image_bytes = base64.b64decode(image_base64)
 
-                image_base64 = image_response.data[0].b64_json
+            image = Image.open(BytesIO(image_bytes))
 
-                filename = f"{uuid.uuid4()}.png"
-                image_path = f"static/{filename}"
+            # Save image
+            filename = f"{uuid.uuid4()}.png"
+            image_path = f"static/{filename}"
 
-                with open(image_path, "wb") as f:
-                    f.write(base64.b64decode(image_base64))
-
-
-            except Exception as img_error:
-
-                # Log but don't crash
-                print("Image generation failed:", img_error)
-                image_path = None
+            image.save(image_path)
 
 
         except Exception as e:
-
-            print("Main error:", e)
-            error_message = "Something went wrong. Please try again."
-
+            interpretation = f"Error: {str(e)}"
 
 
     return render_template(
         "index.html",
         interpretation=interpretation,
-        image_path=image_path,
-        error=error_message
+        image_path=image_path
     )
 
 
-# ----------------------------------
-# Run App
-# ----------------------------------
-
 if __name__ == "__main__":
+    app.run(debug=True)
 
-    app.run(debug=True, host="0.0.0.0")
