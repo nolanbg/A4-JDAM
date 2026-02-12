@@ -72,12 +72,12 @@ def index():
 
             image_prompt = f"""
             Create a dadaist, ethereal illustration
-            inspired by this dream and its Jungian meaning. Combine logo-like motifs with incredibly realistic imagery:
+            inspired by this dream and its Jungian meaning. Combine logo-like motifs with incredibly realistic imagery, blending them through glitches, distortion and overexposure.:
 
             {dream_text}
 
             Style: Dadaist, 4k, ethereal,
-            internet aesthetics, symbolic, glitchiness
+            hyperreal, symbolic, glitchiness
             """
 
             image_response = openai.images.generate(
