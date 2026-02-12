@@ -76,8 +76,8 @@ def index():
 
             {dream_text}
 
-            Style: painterly, mystical, atmospheric,
-            symbolic, psychological, soft lighting
+            Style: Dadaist, mystical, ethereal,
+            symbolic, psychological, glitchiness
             """
 
             image_response = openai.images.generate(
