@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <title>Jungian Dream Analyzer</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>🌙 Jungian Dream Analysis Machine</h1>
+
+    <form method="POST">
+
+        <textarea
+            name="dream"
+            placeholder="Describe your dream here..."
+            required></textarea>
+
+        <button type="submit">Analyze Dream</button>
+
+    </form>
+
+
+    {% if interpretation %}
+
+        <div class="results">
+
+            <h2>Interpretation</h2>
+
+            <p>{{ interpretation }}</p>
+
+            {% if image_path %}
+
+                <h2>Dream Image</h2>
+
+                <img src="{{ image_path }}" alt="Dream Image">
+
+            {% endif %}
+
+        </div>
+
+    {% endif %}
+
+</div>
+
+</body>
+</html>
+
