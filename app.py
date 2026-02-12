@@ -72,7 +72,7 @@ def index():
 
             image_prompt = f"""
             Create a dadaist, ethereal illustration
-            inspired by this dream and its Jungian meaning. Convert symbolic elements into logo-like motifs to have contrasting art styles:
+            inspired by this dream and its Jungian meaning. Combine logo-like motifs with incredibly realistic imagery:
 
             {dream_text}
 
